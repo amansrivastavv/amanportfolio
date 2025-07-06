@@ -1,3 +1,33 @@
+✨ Modern Frontend Developer Portfolio with React, Framer Motion & GraphQL
+A responsive and polished personal portfolio built using React, Bootstrap, and Framer Motion, integrated with Hashnode via GraphQL to dynamically fetch blog posts. This project showcases my GitHub projects, technical skills, and writing — with clean UI/UX, smooth animations, and modern developer features. Deployed on Vercel for optimal performance.
+
+🔍 Key Features
+🧠 Featured GitHub Repositories: With live search, animated pagination, and star/fork stats
+
+✍️ Hashnode Blog Integration: Dynamically fetch blog posts via GraphQL API
+
+💬 Floating Contact Form: EmailJS-powered form with toast success popup
+
+💡 Framer Motion Animations: Smooth transitions and engaging UI
+
+🌐 Responsive & SEO-Friendly: Works across all devices with clean codebase
+
+📊 Vercel Analytics: Track engagement with built-in analytics
+
+⚙️ Tech Stack
+Framework: React.js
+
+Styling: Bootstrap 5, Tailwind-ready
+
+Animation: Framer Motion
+
+API & Content: GitHub REST API, Hashnode GraphQL
+
+Email: EmailJS
+
+Deployment: Vercel
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
