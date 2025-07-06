@@ -1,0 +1,121 @@
+/* Layout */
+.navbarNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 5%;
+  position: relative;
+  z-index: 10;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light Navbar (default) */
+.navbar-light {
+  background-color: #fff;
+  color: #333;
+}
+
+.navbar-light .nav-links a,
+.navbar-light .mobile-menu a {
+  color: #333;
+}
+
+.navbar-light .hamburger span {
+  background-color: #333;
+}
+
+/* Dark Navbar (Blogs section) */
+.navbar-dark {
+  background-color: #111;
+  color: #fff;
+}
+
+.navbar-dark .nav-links a,
+.navbar-dark .mobile-menu a {
+  color: #fff;
+}
+
+.navbar-dark .nav-links a:hover,
+.navbar-light .nav-links a:hover {
+  color: #007bff;
+}
+
+.navbar-dark .hamburger span {
+  background-color: #fff;
+}
+
+/* Logo */
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: inherit;
+}
+
+/* Desktop nav links */
+.nav-links {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+/* Hamburger styles */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 6px;
+  z-index: 20;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: #333;
+  transition: all 0.3s ease;
+}
+
+/* Animate to X */
+.hamburger.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Mobile menu */
+.mobile-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: #fff;
+}
+
+.navbar-dark .mobile-menu {
+  background-color: #111;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-links.desktop-only {
+    display: none;
+  }
+}
