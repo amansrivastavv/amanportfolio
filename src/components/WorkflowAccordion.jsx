@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../components/workflowAccordion.css'; 
+import '../components/WorkflowAccordion.css'; 
 const steps = [
   {
     title: 'Requirements Analysis',

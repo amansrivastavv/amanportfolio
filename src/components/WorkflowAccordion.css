@@ -1,4 +1,4 @@
-/* ───────────  Base / Desktop  ─────────── */
+
 body {
   font-family: 'Helvetica Neue', sans-serif;
 }
@@ -25,7 +25,7 @@ body {
 .workflow-heading {
   font-size: 0.75rem;
   letter-spacing: 2px;
-  margin: 0 0 1.25rem 0;        /* add tiny extra bottom space */
+  margin: 0 0 1.25rem 0;        
 }
 
 .arrow-icon {
@@ -93,12 +93,12 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.5rem;     /* ⬅ reduce space under heading */
+    margin-bottom: 0.5rem;     
   }
 
   .workflow-heading {
     font-size: 0.7rem;
-    margin: 0; /* remove default margin */
+    margin: 0; 
   }
 
   .arrow-icon {
@@ -133,3 +133,5 @@ body {
     transition: none !important;
   }
 }
+
+

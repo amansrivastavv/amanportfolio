@@ -54,16 +54,6 @@ const buttonVariants = {
   tap: { scale: 0.9 },
 };
 
-const cardHover = {
-  rest: { scale: 1, rotate: 0, boxShadow: "0 8px 20px rgba(0, 0, 0, 0.1)" },
-  hover: {
-    scale: 1.05,
-    rotate: 1,
-    boxShadow: "0 15px 45px rgba(255, 255, 255, 0.15)",
-    transition: { duration: 0.4, ease: "easeInOut" },
-  },
-};
-
 const TestimonialSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -108,12 +98,18 @@ const TestimonialSection = () => {
               initial="initial"
               animate="animate"
               exit="exit"
-              whileHover="hover"
-              initial="rest"
-              animate="rest"
-              variants={cardHover}
+              whileHover={{
+                scale: 1.05,
+                rotate: 1,
+                boxShadow: "0 15px 45px rgba(255, 255, 255, 0.15)",
+                transition: { duration: 0.4, ease: "easeInOut" },
+              }}
               className="glass-card p-4 p-md-5 rounded-5 text-center shadow w-100"
-              style={{ maxWidth: "700px", background: "rgba(255,255,255,0.06)", backdropFilter: "blur(14px)" }}
+              style={{
+                maxWidth: "700px",
+                background: "rgba(255,255,255,0.06)",
+                backdropFilter: "blur(14px)",
+              }}
             >
               <motion.img
                 src={testimonials[currentIndex].image}
