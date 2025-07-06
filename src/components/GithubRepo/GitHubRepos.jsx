@@ -6,15 +6,15 @@ import "../../styles/pages.css";
 const GitHubRepos = () => {
   const [repos, setRepos] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const reposPerPage = 6;
 
   useEffect(() => {
     const fetchRepos = async () => {
       try {
-        const res = await fetch("https://api.github.com/user/repos?per_page=6&sort=updated", {
-          headers: {
-            Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
-          },
-        });
+        const res = await fetch(
+          "https://api.github.com/users/amansrivastavv/repos?per_page=100&sort=updated"
+        );
         const data = await res.json();
         setRepos(Array.isArray(data) ? data : []);
       } catch (error) {
@@ -27,6 +27,13 @@ const GitHubRepos = () => {
   const filteredRepos = repos.filter((repo) =>
     repo.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const indexOfLastRepo = currentPage * reposPerPage;
+  const indexOfFirstRepo = indexOfLastRepo - reposPerPage;
+  const currentRepos = filteredRepos.slice(indexOfFirstRepo, indexOfLastRepo);
+  const totalPages = Math.ceil(filteredRepos.length / reposPerPage);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <section
@@ -58,14 +65,17 @@ const GitHubRepos = () => {
             placeholder="🔍 Search GitHub Repos"
             className="search-input"
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setCurrentPage(1);
+            }}
           />
         </motion.div>
 
         <div className="row g-4 justify-content-center">
           <AnimatePresence mode="wait">
-            {filteredRepos.length > 0 ? (
-              filteredRepos.map((repo) => (
+            {currentRepos.length > 0 ? (
+              currentRepos.map((repo) => (
                 <motion.div
                   key={repo.id}
                   className="col-11 col-sm-6 col-lg-4"
@@ -125,6 +135,27 @@ const GitHubRepos = () => {
             )}
           </AnimatePresence>
         </div>
+
+        {totalPages > 1 && (
+          <div className="d-flex justify-content-center mt-4 flex-wrap gap-2">
+            {[...Array(totalPages).keys()].map((number) => (
+              <motion.button
+                key={number}
+                onClick={() => paginate(number + 1)}
+                className={`btn btn-sm rounded-pill px-3 fw-semibold ${
+                  currentPage === number + 1
+                    ? "btn-light text-dark"
+                    : "btn-outline-light"
+                }`}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                {number + 1}
+              </motion.button>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
