@@ -53,9 +53,8 @@ const GitHubRepos = () => {
           🚀 Featured GitHub Projects
         </motion.h2>
 
-        {/* 🔍 Search Input */}
         <motion.div
-          className="search-wrapper position-relative mb-5 text-center"
+          className="search-wrapper position-relative mb-3 text-center"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -71,6 +70,15 @@ const GitHubRepos = () => {
             }}
           />
         </motion.div>
+
+        <motion.p
+          className="text-center text-light mb-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4 }}
+        >
+          Showing {currentRepos.length} of {filteredRepos.length} repositories
+        </motion.p>
 
         <div className="row g-4 justify-content-center">
           <AnimatePresence mode="wait">
@@ -101,15 +109,33 @@ const GitHubRepos = () => {
                       <p className="text-white small">
                         {repo.description || "No description available."}
                       </p>
+                      <p className="text-info small mb-1">
+                        🛠 Language: {repo.language || "N/A"}
+                      </p>
+                      <p className="text-green small mb-1">
+                        🕒 Updated on: {new Date(repo.updated_at).toLocaleDateString()}
+                      </p>
+                      {repo.topics && repo.topics.length > 0 && (
+                        <div className="mb-2 d-flex flex-wrap gap-1">
+                          {repo.topics.map((topic, index) => (
+                            <span
+                              key={index}
+                              className="badge bg-secondary rounded-pill"
+                            >
+                              #{topic}
+                            </span>
+                          ))}
+                        </div>
+                      )}
                     </div>
-                    <div className="d-flex justify-content-between align-items-center mt-4">
+                    <div className="d-flex justify-content-between align-items-center mt-3">
                       <span className="text-warning">⭐ {repo.stargazers_count}</span>
                       <span className="text-info">🍴 {repo.forks_count}</span>
                       <a
                         href={repo.html_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="btn btn-sm btn-outline-light rounded-pill px-3"
+                        className="btn btn-sm btn-outline-light rounded-pill px-3 mt-auto"
                       >
                         GitHub ↗
                       </a>
