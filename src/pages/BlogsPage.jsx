@@ -186,7 +186,7 @@ const BlogSection = () => {
                   <div className="card-body text-light">
                     <h5 className="card-title">{post.title}</h5>
                     <p className="card-text">{post.brief}</p>
-                    <small className="text-muted d-block mb-2">
+                    <small className="text-info d-block mb-2">
                       {new Date(post.publishedAt).toLocaleDateString()}
                     </small>
                     <a

@@ -11,6 +11,7 @@ import NotesPage from "./pages/Notes";
 import BlogsPage from "./pages/BlogsPage";
 import AppLayout from "./App";
 import "./index.css";
+import "locomotive-scroll/dist/locomotive-scroll.css";
 
 const router = createBrowserRouter(
   [

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import HeroSection from "./HeroSection";
 import About from "./About";
 import WorkflowAccordion from "../components/WorkflowAccordion";
@@ -12,21 +12,54 @@ import GitHubRepos from "../components/GithubRepo/GitHubRepos";
 import Footer from "../components/Footer";
 import Loader from "../components/Loader";
 import { AnimatePresence, motion } from "framer-motion";
+import LocomotiveScroll from "locomotive-scroll";
+import "locomotive-scroll/dist/locomotive-scroll.css";
+
+// ✅ Export scroll instance to use in other components (like GitHubRepos)
+export let locomotiveInstance = null;
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
+  const scrollRef = useRef(null);
+  const scrollInstance = useRef(null);
 
+  //  Simulate loader delay
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 1000); // 
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, []);
 
+  //  Initialize Locomotive Scroll after loader
+  useEffect(() => {
+    if (!loading && scrollRef.current) {
+      locomotiveInstance = scrollInstance.current = new LocomotiveScroll({
+        el: scrollRef.current,
+        smooth: true,
+        lerp: 0.07,
+        multiplier: 1,
+        class: "is-reveal",
+      });
+
+      //  Update layout after DOM settles
+  const updateTimeout = setTimeout(() => {
+      scrollInstance.current.update();
+    }, 800);
+
+
+      // 🧹 Cleanup on unmount
+      return () => {
+        clearTimeout(updateTimeout);
+        scrollInstance.current.destroy();
+      };
+    }
+  }, [loading]);
+
   return (
     <>
-      {/* Loader Animation */}
+      {/*  Loader Animation */}
       <AnimatePresence>
         {loading && (
           <motion.div
@@ -41,19 +74,34 @@ const Home = () => {
         )}
       </AnimatePresence>
 
+      {/* Main Scroll Container */}
       {!loading && (
-        <>
-          <div className="container">
+        <div data-scroll-container ref={scrollRef}>
+          <div data-scroll-section className="container">
             <HeroSection />
           </div>
-          <About />
-          <WorkflowAccordion />
-          <FeaturedProjects />
-          <SkillsSection />
-          <TestimonialSection />
-          <GitHubRepos />
-          <Footer />
-        </>
+          <div data-scroll-section>
+            <About />
+          </div>
+          <div data-scroll-section>
+            <WorkflowAccordion />
+          </div>
+          <div data-scroll-section>
+            <FeaturedProjects />
+          </div>
+          <div data-scroll-section>
+            <SkillsSection />
+          </div>
+          <div data-scroll-section>
+            <TestimonialSection />
+          </div>
+          <div data-scroll-section>
+            <GitHubRepos />
+          </div>
+          <div data-scroll-section>
+            <Footer />
+          </div>
+        </div>
       )}
     </>
   );

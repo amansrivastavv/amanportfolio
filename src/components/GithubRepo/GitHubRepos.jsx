@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../styles/pages.css";
+import { locomotiveInstance } from "../../pages/Home"; // ⬅️ important
 
 const GitHubRepos = () => {
   const [repos, setRepos] = useState([]);
@@ -17,6 +18,13 @@ const GitHubRepos = () => {
         );
         const data = await res.json();
         setRepos(Array.isArray(data) ? data : []);
+
+        // ⬇️ Refresh Locomotive scroll after content loads
+        setTimeout(() => {
+          if (locomotiveInstance) {
+            locomotiveInstance.update();
+          }
+        }, 500);
       } catch (error) {
         console.error("GitHub API Error:", error);
       }
@@ -32,7 +40,6 @@ const GitHubRepos = () => {
   const indexOfFirstRepo = indexOfLastRepo - reposPerPage;
   const currentRepos = filteredRepos.slice(indexOfFirstRepo, indexOfLastRepo);
   const totalPages = Math.ceil(filteredRepos.length / reposPerPage);
-
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
