@@ -13,7 +13,7 @@ const BlogSection = () => {
 
   const fetchHashnodePosts = async () => {
     const query = `
-      query GetPublicationPosts {
+      query {
         publication(host: "amansrivastav.hashnode.dev") {
           posts(first: 50) {
             edges {
@@ -36,16 +36,16 @@ const BlogSection = () => {
     `;
 
     try {
-      const response = await axios({
-        url: "https://gql.hashnode.com",
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: {
-          query,
-        },
-      });
+      const response = await axios.post(
+        "https://gql.hashnode.com",
+        { query },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Cache-Control": "no-cache",
+          },
+        }
+      );
 
       const postsData =
         response.data?.data?.publication?.posts?.edges?.map(
@@ -55,13 +55,13 @@ const BlogSection = () => {
       cardRefs.current = [];
       setPosts(postsData);
     } catch (error) {
-      console.error("Failed to fetch posts", error);
+      console.error("❌ Failed to fetch posts:", error);
     }
   };
 
   useEffect(() => {
     fetchHashnodePosts();
-    const interval = setInterval(fetchHashnodePosts, 5 * 60 * 1000);
+    const interval = setInterval(fetchHashnodePosts, 5 * 60 * 1000); // Refresh every 5 min
     return () => clearInterval(interval);
   }, []);
 
@@ -151,6 +151,7 @@ const BlogSection = () => {
           </select>
         </motion.div>
 
+        {/* Cards */}
         <div className="row g-4">
           {currentPosts.length === 0 ? (
             <div className="text-center text-light mt-5">
@@ -209,7 +210,9 @@ const BlogSection = () => {
           {[...Array(totalPages)].map((_, i) => (
             <motion.button
               key={i}
-              className={`btn mx-1 ${currentPage === i + 1 ? "btn-light" : "btn-outline-light"}`}
+              className={`btn mx-1 ${
+                currentPage === i + 1 ? "btn-light" : "btn-outline-light"
+              }`}
               onClick={() => paginate(i + 1)}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
@@ -219,6 +222,7 @@ const BlogSection = () => {
           ))}
         </div>
 
+        {/* Refresh Button */}
         <div className="text-center mt-4">
           <motion.button
             className="btn btn-outline-light"
