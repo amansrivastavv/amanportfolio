@@ -11,53 +11,55 @@ const BlogSection = () => {
   const postsPerPage = 6;
   const cardRefs = useRef([]);
 
-  const fetchHashnodePosts = async () => {
-    const query = `
-      query {
-        publication(host: "amansrivastav.hashnode.dev") {
-          posts(first: 50) {
-            edges {
-              node {
-                title
-                brief
-                slug
-                tags {
-                  name
-                }
-                coverImage {
-                  url
-                }
-                publishedAt
+const fetchHashnodePosts = async () => {
+  const query = `
+    query {
+      publication(host: "amansrivastav.hashnode.dev") {
+        posts(first: 50) {
+          edges {
+            node {
+              title
+              brief
+              slug
+              tags {
+                name
               }
+              coverImage {
+                url
+              }
+              publishedAt
             }
           }
         }
       }
-    `;
-
-    try {
-      const response = await axios.post(
-        "https://gql.hashnode.com",
-        { query },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "Cache-Control": "no-cache",
-          },
-        }
-      );
-
-      const postsData =
-        response.data?.data?.publication?.posts?.edges?.map(
-          (edge) => edge.node
-        ) || [];
-
-      cardRefs.current = [];
-      setPosts(postsData);
-    } catch (error) {
-      console.error("❌ Failed to fetch posts:", error);
     }
-  };
+  `;
+
+  try {
+    const response = await axios.post(
+      "https://gql.hashnode.com",
+      { query },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Cache-Control": "no-cache",
+        },
+      }
+    );
+
+    const postsData =
+      response.data?.data?.publication?.posts?.edges?.map(
+        (edge) => edge.node
+      ) || [];
+
+    cardRefs.current = [];
+    setPosts(postsData);
+  } catch (error) {
+    console.error("❌ Failed to fetch posts:", error);
+  }
+};
+
+
 
   useEffect(() => {
     fetchHashnodePosts();
