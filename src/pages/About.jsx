@@ -1,8 +1,15 @@
 import React from "react";
+import { useNavigate } from "react-router-dom"; // ✅ Import
 import "../styles/pages.css";
 import aboutImg from "../assets/images/about.jpeg";
 
 const About = () => {
+  const navigate = useNavigate(); // ✅ Hook for navigation
+
+  const handleShowMore = () => {
+    navigate("/about-details"); // ✅ Route to AboutDetails page
+  };
+
   return (
     <section className="about-section py-5">
       <div className="container">
@@ -22,7 +29,7 @@ const About = () => {
           <div className="col-md-6">
             <div className="about-text-section px-4 py-3">
               <h2 className="about-heading">About Me</h2>
-              <p className="about-text">
+                <p className="about-text">
                 Hello! I'm a passionate web developer with a love for creating
                 dynamic and responsive web applications. With a background in
                 computer science and a keen eye for design, I strive to build
@@ -38,21 +45,18 @@ const About = () => {
                 collaboration and am always open to working on exciting
                 projects.
               </p>
+              <button onClick={handleShowMore}>Show More</button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Typing Animation Section */}
       <div className="typing-container mt-5 text-center">
         <p className="typing-text">
           "Clean code always looks like it was written<br />
           by someone who cares."
         </p>
       </div>
-      {/* <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <DecayCard />
-      </div> */}
     </section>
   );
 };

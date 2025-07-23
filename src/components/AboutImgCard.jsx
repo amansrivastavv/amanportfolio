@@ -76,13 +76,11 @@ const DecayCard = ({
     <div
       ref={svgRef}
       className="content"
-      /* parent box keeps requested size, but can be overridden by CSS */
       style={{ width, height }}
     >
       <svg
-        /* origin 0 0 so इमेज crop न हो */
         viewBox={`0 0 ${vbW} ${vbH}`}
-        preserveAspectRatio="xMidYMid meet"   /* ‘meet’ = no crop, letter‑boxed if needed */
+        preserveAspectRatio="xMidYMid meet"   
         className="svg"
       >
         {/* ─────── FX filter ─────── */}
