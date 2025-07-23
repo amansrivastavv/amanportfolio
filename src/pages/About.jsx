@@ -1,13 +1,16 @@
 import React from "react";
-import { useNavigate } from "react-router-dom"; // ✅ Import
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import "../styles/pages.css";
 import aboutImg from "../assets/images/about.jpeg";
+import ShowMoreButton from "../components/ShowMoreButton";
 
 const About = () => {
-  const navigate = useNavigate(); // ✅ Hook for navigation
+  const navigate = useNavigate();
 
   const handleShowMore = () => {
-    navigate("/about-details"); // ✅ Route to AboutDetails page
+    console.log("Show More Clicked!");
+    navigate("/about-details");
   };
 
   return (
@@ -45,7 +48,7 @@ const About = () => {
                 collaboration and am always open to working on exciting
                 projects.
               </p>
-              <button onClick={handleShowMore}>Show More</button>
+              <ShowMoreButton handleShowMore={handleShowMore} />
             </div>
           </div>
         </div>
