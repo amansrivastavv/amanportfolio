@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
+import { Toaster, toast } from "react-hot-toast";
 import "./BlogSection.css";
 
 const BlogSection = () => {
@@ -10,60 +11,75 @@ const BlogSection = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 6;
   const cardRefs = useRef([]);
+  const isInitialMount = useRef(true);
 
-const fetchHashnodePosts = async () => {
-  const query = `
-    query {
-      publication(host: "amansrivastav.hashnode.dev") {
-        posts(first: 50) {
-          edges {
-            node {
-              title
-              brief
-              slug
-              tags {
-                name
+  const fetchHashnodePosts = async () => {
+    const loadingToast = toast.loading('Loading blog posts...');
+    const timestamp = Date.now(); // Add timestamp for cache busting
+    
+    try {
+      const response = await axios.post(
+        "https://gql.hashnode.com",
+        { 
+          query: `
+            query {
+              publication(host: "amansrivastav.hashnode.dev") {
+                posts(first: 50) {
+                  edges {
+                    node {
+                      title
+                      brief
+                      slug
+                      tags { name }
+                      coverImage { url }
+                      publishedAt
+                    }
+                  }
+                }
               }
-              coverImage {
-                url
-              }
-              publishedAt
             }
+          `,
+          variables: { timestamp } // Add timestamp to prevent caching
+        },
+        {
+          headers: { 
+            "Content-Type": "application/json",
+            "Cache-Control": "no-cache, no-store, must-revalidate",
+            "Pragma": "no-cache",
+            "Expires": "0"
           }
         }
+      );
+
+      const postsData = response.data?.data?.publication?.posts?.edges?.map(edge => edge.node) || [];
+      console.log(`[${new Date().toISOString()}] Fetched ${postsData.length} posts`);
+      setPosts(postsData);
+      cardRefs.current = [];
+      
+      // Show success message with timestamp
+      const lastUpdated = new Date().toLocaleTimeString();
+      toast.success(`Updated ${lastUpdated}`, { 
+        id: loadingToast,
+        duration: 3000
+      });
+      
+      if (!isInitialMount.current) {
+        toast.success('Blog posts refreshed!', { duration: 2000 });
       }
+      isInitialMount.current = false;
+      
+    } catch (error) {
+      console.error(`[${new Date().toISOString()}] Failed to fetch posts:`, error);
+      toast.error('Failed to load blog posts', { 
+        id: loadingToast,
+        duration: 3000
+      });
     }
-  `;
-
-  try {
-    const response = await axios.post(
-      "https://gql.hashnode.com",
-      { query },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          "Cache-Control": "no-cache",
-        },
-      }
-    );
-
-    const postsData =
-      response.data?.data?.publication?.posts?.edges?.map(
-        (edge) => edge.node
-      ) || [];
-
-    cardRefs.current = [];
-    setPosts(postsData);
-  } catch (error) {
-    console.error("❌ Failed to fetch posts:", error);
-  }
-};
-
-
+  };
 
   useEffect(() => {
     fetchHashnodePosts();
-    const interval = setInterval(fetchHashnodePosts, 5 * 60 * 1000); // Refresh every 5 min
+    const interval = setInterval(fetchHashnodePosts, 60 * 1000);
     return () => clearInterval(interval);
   }, []);
 
@@ -114,6 +130,15 @@ const fetchHashnodePosts = async () => {
 
   return (
     <section className="blog-section container-fluid py-5">
+      <Toaster 
+        position="top-right"
+        toastOptions={{
+          style: {
+            background: '#333',
+            color: '#fff',
+          },
+        }}
+      />
       <div className="container">
         <motion.h2
           className="text-center mb-5 text-light"
