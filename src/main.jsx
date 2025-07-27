@@ -12,6 +12,7 @@ import BlogsPage from "./pages/BlogsPage";
 import AppLayout from "./App";
 import "./index.css";
 import "locomotive-scroll/dist/locomotive-scroll.css";
+import AboutDetails from "./pages/AboutDetails";
 
 const router = createBrowserRouter(
   [
@@ -27,6 +28,7 @@ const router = createBrowserRouter(
         { path: "blogs", element: <BlogsPage /> },
         { path: "featured-projects", element: <FeaturedProjects /> },
         { path: "all-projects", element: <ProjectsMain /> },
+        { path: "about-details", element: <AboutDetails /> },
       ],
     },
   ],
