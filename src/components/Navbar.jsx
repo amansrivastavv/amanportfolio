@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import './Navbar.css';
-import DarkLogo from '../assets/logos/AFBlack.svg';        
-import LightLogo from '../assets/logos/AFWhite.png'
+import DarkLogo from '../assets/logos/AFBlack.svg';
+import LightLogo from '../assets/logos/AFWhite.png';
 
 const menuItems = [
   { name: 'Home', path: '/' },
@@ -18,17 +18,15 @@ const Navbar = () => {
   const toggleMenu = () => setMenuOpen((prev) => !prev);
 
   const location = useLocation();
-  const isBlogPage = location.pathname.includes('/blogs');
+  const isDarkPage = location.pathname.includes('/blogs') || location.pathname.includes('/about');
 
   return (
-    <nav
-      className={`navbarNav ${isBlogPage ? 'navbar-dark' : 'navbar-light'}`}
-    >
+    <nav className={`navbarNav ${isDarkPage ? 'navbar-dark' : 'navbar-light'}`}>
       {/* Logo */}
       <div className="logo">
         <Link to="/">
           <img
-            src={isBlogPage ? LightLogo : DarkLogo}
+            src={isDarkPage ? LightLogo : DarkLogo}
             alt="Logo"
             className="logo-img"
             style={{ height: '60px', width: 'auto' }}
@@ -44,7 +42,7 @@ const Navbar = () => {
       </div>
 
       {/* Desktop Links */}
-      <div className={`nav-links desktop-only ${isBlogPage ? 'text-light' : 'text-dark'}`}>
+      <div className={`nav-links desktop-only ${isDarkPage ? 'text-light' : 'text-dark'}`}>
         {menuItems.map((item) => (
           <Link key={item.name} to={item.path}>
             {item.name}
@@ -56,7 +54,7 @@ const Navbar = () => {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className={`mobile-menu ${isBlogPage ? 'bg-dark text-light' : 'bg-light text-dark'}`}
+            className={`mobile-menu ${isDarkPage ? 'bg-dark text-light' : 'bg-light text-dark'}`}
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
