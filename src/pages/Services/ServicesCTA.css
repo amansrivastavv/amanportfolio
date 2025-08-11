@@ -1,0 +1,52 @@
+.services-cta-wrapper { padding-top: 20px; padding-bottom: 6px; }
+
+/* Primary CTA — animated gradient pill */
+.cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  color: #071124;
+  background: linear-gradient(90deg, #7c3aed, #06b6d4);
+  font-weight: 700;
+  font-size: 1rem;
+  box-shadow: 0 12px 30px rgba(124,58,237,0.14);
+  transition: transform .18s ease, box-shadow .18s ease;
+  outline: none;
+}
+
+.cta-primary:focus { box-shadow: 0 10px 32px rgba(99,102,241,0.22); transform: translateY(-3px); }
+
+.cta-primary .cta-text { display: inline-block; }
+.cta-primary .cta-icon { display: inline-flex; align-items: center; justify-content: center; }
+
+/* Secondary CTA — outline */
+.cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.02);
+  color: #e6eef8;
+  font-weight: 600;
+}
+
+/* Subtext */
+.cta-sub { color: rgba(230,238,248,0.75); }
+
+/* Modal tweaks */
+.modal-content { border-radius: 12px; overflow: hidden; }
+.modal-body .form-note { margin-top: 6px; }
+
+/* Toast */
+.toast-container .toast { background: #071127; color: #e6eef8; border: 1px solid rgba(255,255,255,0.04); }
+
+/* Responsive */
+@media (max-width: 576px) {
+  .cta-primary { width: 100%; justify-content: center; }
+  .cta-secondary { display: block; margin: 12px auto 0; }
+}

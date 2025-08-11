@@ -89,30 +89,27 @@ const HomeSection = () => {
           </div>
 
           {/* Paragraphs */}
-          <div className="mt-4 paragraph-responsive">
-            <motion.p
-              className="intro-paragraph"
-              variants={textVariant}
-              initial="hidden"
-              animate="visible"
-              custom={0.6}
-            >
-              Hi! I'm Aman Srivastav, a front-end developer with 1.5 years of
-              experience crafting responsive and user-friendly web applications
-              that deliver real value.
-            </motion.p>
-            <motion.p
-              className="intro-paragraph"
-              variants={textVariant}
-              initial="hidden"
-              animate="visible"
-              custom={0.8}
-            >
-              My goal is to continuously grow as a developer, contribute to
-              impactful products, and master performance-driven front-end
-              architectures that create seamless digital experiences.
-            </motion.p>
-          </div>
+      {/* Paragraphs */}
+<div className="mt-4 paragraph-responsive">
+  <motion.p
+    className="intro-paragraph"
+    variants={textVariant}
+    initial="hidden"
+    animate="visible"
+    custom={0.6}
+  >
+    Hi! I'm Aman Srivastav — I design and build high-performance, accessible, and visually stunning digital experiences that help businesses grow.
+  </motion.p>
+  <motion.p
+    className="intro-paragraph"
+    variants={textVariant}
+    initial="hidden"
+    animate="visible"
+    custom={0.8}
+  >
+    I partner with startups, brands, and product teams to turn ideas into fast, maintainable, and scalable products — blending clean code with pixel-perfect design for maximum impact.
+  </motion.p>
+</div>
         </motion.div>
 
         {/* Right Side: Image */}

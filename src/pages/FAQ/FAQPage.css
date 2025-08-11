@@ -1,0 +1,36 @@
+.faq-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.faq-card:hover {
+  border-color: rgba(0, 123, 255, 0.6);
+  background: rgba(0, 123, 255, 0.12);
+}
+
+.faq-question {
+  color: #0d6efd;
+  font-weight: 600;
+}
+
+.faq-answer {
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+}
+
+.chevron {
+  transition: transform 0.3s ease;
+  color: #0d6efd;
+}
+
+.chevron.rotate {
+  transform: rotate(180deg);
+}
+.faq-answer {
+  overflow: visible !important;
+}
+
