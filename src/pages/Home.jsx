@@ -15,7 +15,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import LocomotiveScroll from "locomotive-scroll";
 import "locomotive-scroll/dist/locomotive-scroll.css";
 
-// ✅ Export scroll instance to use in other components (like GitHubRepos)
 export let locomotiveInstance = null;
 
 const Home = () => {
@@ -23,7 +22,7 @@ const Home = () => {
   const scrollRef = useRef(null);
   const scrollInstance = useRef(null);
 
-  //  Simulate loader delay
+  // loader delay
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
@@ -32,7 +31,7 @@ const Home = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  //  Initialize Locomotive Scroll after loader
+  // Locomotive Scroll after loader
   useEffect(() => {
     if (!loading && scrollRef.current) {
       locomotiveInstance = scrollInstance.current = new LocomotiveScroll({
@@ -43,13 +42,11 @@ const Home = () => {
         class: "is-reveal",
       });
 
-      //  Update layout after DOM settles
   const updateTimeout = setTimeout(() => {
       scrollInstance.current.update();
     }, 800);
 
 
-      // 🧹 Cleanup on unmount
       return () => {
         clearTimeout(updateTimeout);
         scrollInstance.current.destroy();

@@ -8,6 +8,7 @@ import LightLogo from '../assets/logos/AFWhite.png';
 const menuItems = [
   { name: 'Home', path: '/' },
   { name: 'About', path: '/about' },
+  { name: 'Services', path: '/services' },
   { name: 'Projects', path: '/projects' },
   { name: 'Notes', path: '/notes' },
   { name: 'Blogs', path: '/blogs' },
@@ -18,7 +19,7 @@ const Navbar = () => {
   const toggleMenu = () => setMenuOpen((prev) => !prev);
 
   const location = useLocation();
-  const isDarkPage = location.pathname.includes('/blogs') || location.pathname.includes('/about');
+  const isDarkPage = location.pathname.includes('/blogs') || location.pathname.includes('/about') || location.pathname.includes('/services');
 
   return (
     <nav className={`navbarNav ${isDarkPage ? 'navbar-dark' : 'navbar-light'}`}>
