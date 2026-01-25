@@ -5,7 +5,6 @@ seoDescription: "Curious how your social media activity can be used to track you
 datePublished: Sun Jul 27 2025 06:01:23 GMT+0000 (Coordinated Universal Time)
 cuid: cmdl9ty1y000102lb4ouf07pj
 slug: how-safe-is-your-social-media-account
-cover: https://cdn.hashnode.com/res/hashnode/image/upload/v1769332070508/ebac3373-de1b-4727-a51b-d8b30eab2487.png
 ogImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1769332025551/d3f5641f-5515-4fa7-8ed0-0edf48b8b0cd.png
 tags: online-safety, digital-footprint, social-media-privacy, tracking-through-likes, cybercrime-awareness, personal-data-on-social-media, how-hackers-track-you-osint-tools, social-engineering-data-security, cyber-awareness-india, protect-social-media-account, stalkers-on-instagram
 
